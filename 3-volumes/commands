@@ -1,0 +1,16 @@
+docker run -p 8080:80 --name filebrowser -d filebrowser/filebrowser:v2.31.2
+
+docker run -p 8080:80 --name filebrowser -d filebrowser/filebrowser:v2.32.0
+
+
+
+docker run -v $(pwd)/storage:/srv -p 8080:80 --name filebrowser -d filebrowser/filebrowser:v2.31.2
+
+docker run -v $(pwd)/storage:/srv -p 8080:80 --name filebrowser -d filebrowser/filebrowser:v2.32.0
+
+
+docker volume create fb_storage
+
+docker run -v fb_storage:/srv -p 8080:80 --name filebrowser -d filebrowser/filebrowser:v2.31.2
+
+docker run -v fb_storage:/srv -p 8080:80 --name filebrowser -d filebrowser/filebrowser:v2.32.0
