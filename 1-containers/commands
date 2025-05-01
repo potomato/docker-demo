@@ -1,17 +1,50 @@
+# run some different flavours of container
 docker run hello-world
 
 docker run -it alpine
 
-docker run -p 8080:80 nginx
+docker run -p 8089:80 -d nginx
 
 
+# list running containers, show logs
 docker ps
-docker ps -a
-
-
-docker rm <container name>
-
-docker run -p 8080:80 -d nginx
 
 docker logs [-f] <container name>
 
+
+# stop container
+docker stop <container name>
+
+# see all docker containers
+docker ps -a
+
+# remove stopped container
+docker rm <container name>
+
+
+# other parameters to run
+# -it
+# as above
+
+# -d
+# as above
+
+# -e
+docker run --rm -it -e FOOD=cheese -e WEATHER=sunny alpine
+docker run --rm -it -e FOOD=cheese -e WEATHER=sunny -e NAME alpine
+
+# --name
+docker run --name hw hello-world
+
+# --rm
+docker run --name willgo --rm hello-world
+
+# -w
+docker run --rm -it -w /var alpine
+
+
+# run the default or a different command
+docker run --rm -it ubuntu
+docker run --rm -it ubuntu bash
+docker run --rm -it ubuntu sh
+docker run --rm -it ubuntu top
