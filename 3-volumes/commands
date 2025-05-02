@@ -1,4 +1,5 @@
 # create a container from image filebrowser:v2.31.2
+# admin/admin
 docker run -p 8089:80 --name filebrowser -d --rm filebrowser/filebrowser:v2.31.2
 # upload a file
 # vulnerability - need to upgrade!
