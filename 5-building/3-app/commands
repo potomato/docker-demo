@@ -1,0 +1,6 @@
+docker build -t blazorapp .
+
+docker run --rm -p "8099:8080" --name blazorapp -d blazorapp
+
+docker stop blazorapp
+
