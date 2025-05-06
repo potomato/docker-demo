@@ -3,7 +3,7 @@ docker run hello-world
 
 docker run -it alpine
 
-docker run -p 8089:80 -d nginx
+docker run -p 8099:80 -d nginx
 
 
 # list running containers, show logs
