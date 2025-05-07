@@ -1,0 +1,81 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=datastore
+
+  mitmproxy:
+    image: mitmproxy/mitmproxy:11
+    ports:
+      - 8080:8080
+      - 127.0.0.1:8081:8081
+    stdin_open: true
+    tty: true
+    command:
+      - mitmweb
+      - --mode
+      - reverse:http://httpbin:80
+      - --web-host
+      - 0.0.0.0
+      - --set
+      - web_password=password
+    depends_on:
+      - httpbin
+    
+  httpbin:
+    image: kennethreitz/httpbin
+    ports:
+      - 8082:80
+
+  grafana:
+    build:
+      dockerfile: ./grafana/Dockerfile
+    ports:
+      - 3000:3000
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/prometheus.yaml:/prometheus/prometheus.yml
+    command:
+      - "--log.level=debug"
+
+  wiremock:
+    image: wiremock/wiremock:latest
+    ports:
+      - 8090:8080
+    command:
+      - --verbose
+      - --global-response-templating
+
+  postcodesio-api:
+    image: idealpostcodes/postcodes.io:latest
+    restart: unless-stopped
+    depends_on:
+      - postcodesio-db
+    environment:
+      - POSTGRES_DATABASE=postcodesiodb
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postcodesio
+      - POSTGRES_HOST=postcodesio-db
+    ports:
+      - 8000:8000
+
+  postcodesio-db:
+    image: idealpostcodes/postcodes.io.db:latest
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=postcodesiodb
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postcodesio
+    ports:
+      - 5438:5432
+
+volumes:
+  postgres_data:
