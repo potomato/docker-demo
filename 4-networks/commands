@@ -21,3 +21,8 @@ docker run --rm -d --network my-network --name pgserver -e POSTGRES_PASSWORD=pas
 # start the postgres admin tool in the same network
 docker run --rm --network my-network -e PGADMIN_DEFAULT_EMAIL=postgres@email.com -e PGADMIN_DEFAULT_PASSWORD=uipw -e PGADMIN_DISABLE_POSTFIX=1 -p "8099:80" dpage/pgadmin4
 
+docker stop pgserver
+
+docker network ls
+
+docker network rm my-network

@@ -29,15 +29,15 @@ docker rm <container name>
 # -d
 # as above
 
-# -e
-docker run --rm -it -e FOOD=cheese -e WEATHER=sunny alpine
-docker run --rm -it -e FOOD=cheese -e WEATHER=sunny -e NAME alpine
-
 # --name
 docker run --name hw hello-world
 
 # --rm
 docker run --name willgo --rm hello-world
+
+# -e
+docker run --rm -it -e FOOD=cheese -e WEATHER=sunny alpine
+docker run --rm -it -e FOOD=cheese -e WEATHER=sunny -e NAME alpine
 
 # -w
 docker run --rm -it -w /var alpine
