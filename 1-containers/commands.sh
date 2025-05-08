@@ -4,7 +4,7 @@
 docker run hello-world
 
 # run the alpine distribution's shell interactively
-# whoami; ps -ef; ls /; hostname
+# whoami; ps -ef; ls /; hostname; uname -a
 docker run -it alpine
 
 # run the nginx web server as a daemon (in the background)
@@ -59,4 +59,7 @@ docker run --rm -it ubuntu sh
 
 # create then start separately (sometimes required)
 docker create --rm -it -e FOOD=cheese -e WEATHER=sunny -e NAME --name created_first alpine
+docker ps -a
 docker start -i created_first
+
+docker container prune

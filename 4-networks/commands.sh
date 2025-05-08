@@ -29,3 +29,5 @@ docker stop pgserver
 docker network rm my-network
 
 docker network ls
+
+docker network prune

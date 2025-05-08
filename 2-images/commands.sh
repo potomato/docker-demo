@@ -9,6 +9,8 @@ https://hub.docker.com/
 
 docker pull <image name>[:<tag>]
 
+# docker registries
+
 docker rmi <image name>
 
 docker image history <image name>

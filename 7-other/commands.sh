@@ -6,9 +6,11 @@ docker exec -it dbserver bash
 
 docker stop dbserver
 
+
 docker inspect <anything>
 
-# restart
+
+# restart option
 # contents of my azurite.sh
 #!/bin/bash
 docker volume create azurite
