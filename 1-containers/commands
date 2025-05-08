@@ -1,8 +1,13 @@
 # run some different flavours of container
+# docker run <image name>[:tag]
+
 docker run hello-world
 
+# run the alpine distribution's shell interactively
+# whoami; ps -ef; ls /; hostname
 docker run -it alpine
 
+# run the nginx web server as a daemon (in the background)
 docker run -p 8099:80 -d nginx
 
 
@@ -17,6 +22,9 @@ docker stop <container name>
 
 # see all docker containers
 docker ps -a
+
+# restart stopped container
+docker start [-i] <container name>
 
 # remove stopped container
 docker rm <container name>
@@ -33,7 +41,7 @@ docker rm <container name>
 docker run --name hw hello-world
 
 # --rm
-docker run --name willgo --rm hello-world
+docker run --rm hello-world
 
 # -e
 docker run --rm -it -e FOOD=cheese -e WEATHER=sunny alpine
@@ -47,4 +55,8 @@ docker run --rm -it -w /var alpine
 docker run --rm -it ubuntu
 docker run --rm -it ubuntu bash
 docker run --rm -it ubuntu sh
-docker run --rm -it ubuntu top
+
+
+# create then start separately (sometimes required)
+docker create --rm -it -e FOOD=cheese -e WEATHER=sunny -e NAME --name created_first alpine
+docker start -i created_first

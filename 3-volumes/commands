@@ -11,11 +11,11 @@ docker stop filebrowser
 
 
 # create a container with a bind mount from ./storage to /srv in the container (where filebrowser stores content)
-docker run -v $(pwd)/storage:/srv -p 8099:80 --name filebrowser -d --rm filebrowser/filebrowser:v2.31.2
+docker run -v ./storage:/srv -p 8099:80 --name filebrowser -d --rm filebrowser/filebrowser:v2.31.2
 docker stop filebrowser
 
 # upgrade
-docker run -v $(pwd)/storage:/srv -p 8099:80 --name filebrowser -d --rm filebrowser/filebrowser:v2.32.0
+docker run -v ./storage:/srv -p 8099:80 --name filebrowser -d --rm filebrowser/filebrowser:v2.32.0
 docker stop filebrowser
 
 
@@ -23,13 +23,17 @@ docker stop filebrowser
 docker volume create fb_storage
 
 # create a container with a volume mount from our dedicated volume to /srv in the container
-docker run -v fb_storage:/srv -p 8080:80 --name filebrowser -d --rm filebrowser/filebrowser:v2.31.2
+docker run -v fb_storage:/srv -p 8099:80 --name filebrowser -d --rm filebrowser/filebrowser:v2.31.2
 docker stop filebrowser
 
 # upgrade
-docker run -v fb_storage:/srv -p 8080:80 --name filebrowser -d --rm filebrowser/filebrowser:v2.32.0
+docker run -v fb_storage:/srv -p 8099:80 --name filebrowser -d --rm filebrowser/filebrowser:v2.32.0
 docker stop filebrowser
 
 
 # look out our dedicated docker volume (read-only)
-docker run --rm -it -v fb_storage:/appstorage:ro alpine
+docker run --rm -it -v fb_storage:/appstorage:ro --workdir /appstorage alpine
+
+
+docker volume ls
+docker volume prune
