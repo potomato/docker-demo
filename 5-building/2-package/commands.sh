@@ -5,6 +5,8 @@ docker build -t aaf .
 # (q to quit the program)
 docker run --rm -it aaf
 
+docker image history <image name>
+
 # delete our image
 docker rmi aaf
 

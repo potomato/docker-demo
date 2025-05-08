@@ -13,6 +13,4 @@ docker pull <image name>[:<tag>]
 
 docker rmi <image name>
 
-docker image history <image name>
-
 docker image prune
